@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>XHS Image Extractor | 小红书无水印图片提取</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="globe globe-2"></div>
+    </div>
+
+    <main class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fa-solid fa-camera-retro"></i>
+                <span>XHS Extractor</span>
+            </div>
+            <p class="subtitle">Extract high-quality, watermark-free images from Xiaohongshu posts.</p>
+        </header>
+
+        <section class="control-panel glass-card">
+            <div class="input-group">
+                <i class="fa-solid fa-link input-icon"></i>
+                <input type="text" id="urlInput" placeholder="Paste XHS share link here (e.g., http://xhslink.com/...)"
+                    autocomplete="off">
+            </div>
+
+            <div class="button-group">
+                <button id="loginBtn" class="btn btn-secondary">
+                    <i class="fa-solid fa-user-lock"></i> Login First
+                </button>
+                <button id="extractBtn" class="btn btn-primary">
+                    <i class="fa-solid fa-bolt"></i> Extract Images
+                </button>
+            </div>
+            <div id="statusMsg" class="status-message"></div>
+        </section>
+
+        <section id="resultSection" class="result-section hidden">
+            <div class="result-header">
+                <h2 id="noteTitle" class="note-title">Note Title</h2>
+                <button id="downloadAllBtn" class="btn btn-outline">
+                    <i class="fa-solid fa-download"></i> Download All
+                </button>
+            </div>
+
+            <div id="imageGrid" class="image-grid">
+                <!-- Images will be injected here -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 XHS Extractor. Built for creators.</p>
+    </footer>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
