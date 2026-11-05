@@ -1,20 +1,21 @@
-# Use official Playwright image (includes Python and Browsers)
-# This is much more reliable than installing Chrome manually on a slim image
 FROM mcr.microsoft.com/playwright/python:v1.40.0-jammy
 
 WORKDIR /app
 
-# Copy dependencies
-COPY requirements.txt .
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PORT=5000 \
+    XHS_DATA_DIR=/app/user_data \
+    XHS_ENABLE_BROWSER_LOGIN=false
 
-# Install Python deps
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
 COPY . .
 
-# Expose the Flask port
-EXPOSE 5000
+RUN mkdir -p /app/user_data && chmod 700 /app/user_data
 
-# Command to run the application (host=0.0.0.0 is crucial for Docker)
-CMD ["python", "app.py"]
+EXPOSE 5000
+VOLUME ["/app/user_data"]
+
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 90 --access-logfile - --error-logfile - app:app"]

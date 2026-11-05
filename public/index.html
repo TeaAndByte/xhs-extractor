@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>XHS Image Extractor | 小红书无水印图片提取</title>
-    <!-- Fonts -->
+    <meta name="theme-color" content="#111217">
+    <meta name="description" content="粘贴小红书笔记链接，提取、预览并批量下载笔记图片。">
+    <title>XHS Extractor - 小红书笔记图片提取</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="background-globes">
+    <div class="background-globes" aria-hidden="true">
         <div class="globe globe-1"></div>
         <div class="globe globe-2"></div>
     </div>
@@ -25,52 +22,60 @@
     <main class="container">
         <header class="header">
             <div class="logo">
-                <i class="fa-solid fa-camera-retro"></i>
+                <i class="fa-solid fa-camera-retro" aria-hidden="true"></i>
                 <span>XHS Extractor</span>
             </div>
-            <p class="subtitle">Extract high-quality, watermark-free images from Xiaohongshu posts.</p>
+            <h1 class="page-title">小红书笔记图片提取</h1>
+            <p class="subtitle">粘贴笔记链接，预览图片，支持单张下载和 ZIP 批量保存。</p>
         </header>
 
-        <section class="control-panel glass-card">
+        <section class="control-panel glass-card" aria-label="笔记链接提取">
+            <label class="input-label" for="urlInput">笔记分享链接</label>
             <div class="input-group">
-                <i class="fa-solid fa-link input-icon"></i>
-                <input type="text" id="urlInput" placeholder="Paste XHS share link here (e.g., http://xhslink.com/...)"
-                    autocomplete="off">
+                <i class="fa-solid fa-link input-icon" aria-hidden="true"></i>
+                <input type="text" id="urlInput"
+                    placeholder="粘贴小红书链接或完整分享文案，例如 https://xhslink.com/..."
+                    autocomplete="off" spellcheck="false">
             </div>
 
             <div class="button-group">
-                <button id="loginBtn" class="btn btn-secondary">
-                    <i class="fa-solid fa-user-lock"></i> Login First
+                <button id="loginBtn" class="btn btn-secondary" type="button">
+                    <i class="fa-solid fa-user-lock" aria-hidden="true"></i> 登录小红书
                 </button>
-                <button id="extractBtn" class="btn btn-primary">
-                    <i class="fa-solid fa-bolt"></i> Extract Images
+                <button id="extractBtn" class="btn btn-primary" type="button">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i> 提取图片
                 </button>
             </div>
-            <div id="statusMsg" class="status-message"></div>
+            <p class="login-tip">登录仅在需要访问的笔记时使用；登录状态保存在运行服务的本机。</p>
+            <div id="statusMsg" class="status-message" role="status" aria-live="polite"></div>
         </section>
 
-        <section id="resultSection" class="result-section hidden">
+        <section id="resultSection" class="result-section hidden" aria-label="提取结果">
             <div class="result-header">
-                <h2 id="noteTitle" class="note-title">Note Title</h2>
-                <button id="downloadAllBtn" class="btn btn-outline">
-                    <i class="fa-solid fa-download"></i> Download All
+                <div class="note-info">
+                    <h2 id="noteTitle" class="note-title">笔记标题</h2>
+                    <p id="noteDesc" class="note-desc" hidden></p>
+                    <span id="imageCount" class="image-count"></span>
+                </div>
+                <button id="downloadAllBtn" class="btn btn-outline" type="button" disabled>
+                    <i class="fa-solid fa-download" aria-hidden="true"></i> 下载全部图片
                 </button>
             </div>
+            <div id="imageGrid" class="image-grid"></div>
+        </section>
 
-            <div id="imageGrid" class="image-grid">
-                <!-- Images will be injected here -->
-            </div>
+        <section class="usage-note">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            <p>提取结果取决于小红书页面和账号访问权限。请仅保存自己有权使用的内容，不要未经许可转载或传播。</p>
         </section>
     </main>
 
     <footer class="footer">
-        <p>&copy; 2024 XHS Extractor. Built for creators.</p>
+        <p>XHS Extractor · 个人学习与效率工具</p>
     </footer>
 
-    <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script src="script.js"></script>
 </body>
-
 </html>
