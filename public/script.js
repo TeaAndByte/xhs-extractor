@@ -52,7 +52,7 @@ function fileExtension(blob) {
 
 function safeFileName(value) {
     return (value || 'xhs-images')
-        .replace(/[\\/:*?"<>|\x00-\x1f]/g, '_')
+        .replace(/[\\\/:*?"<>|\x00-\x1f]/g, '_')
         .replace(/\s+/g, ' ')
         .trim()
         .slice(0, 60) || 'xhs-images';
